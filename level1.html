@@ -3,25 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/rule.css" />
   <title>Document</title>
-  <style>
-    body {
-        height: 100vh;
-        background-image: url('image/main.png');
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    #container {
-        width: 80%;
-        height: 80%;
-    }
-</style>
 </head>
 <body>
+<<<<<<< HEAD
+  <div id="container">
+    <div id="game-rule">
+      <span>플레이 방법</span>
+      <image id="game-rule-img" src="image/rule.jpg"></image>
+      <span id="ok">10초 후 자동으로 게임이 시작됩니다.</span>
+    </div>
+    <div id="timer" class="hidden">
+      <span>남은 시간</span>
+      <span>20</span>
+    </div>
+    <div id="reday-start" class="hidden">
+      <span>준비</span>
+    </div>
+    <!--게임 종료 화면-->
+    <div id="game-result" class="hidden"></div>
+  </div>
+
+  <script src="js/game.js"></script>
+=======
   <div id="container"></div>
+>>>>>>> 2340a4e48193f211f15e42f23ef4e8ff72679161
 </body>
 </html>
