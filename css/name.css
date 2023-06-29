@@ -28,6 +28,14 @@ input {
     border-radius: 5px;
 }
 
+input[type=text] {
+    font-size: 30px;
+}
+
+input[type=password] {
+    font-size: 30px;
+}
+
 #next:hover {
     color: darkgrey;
 }

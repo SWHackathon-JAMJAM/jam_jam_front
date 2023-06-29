@@ -186,6 +186,7 @@
     
 
 
+
   <script>
     let recognition;
     let recordButton;
@@ -195,11 +196,6 @@
 
     // 음성인식 API 지원 여부 확인
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-      // 음성 녹음 버튼 활성화
-      recordButton = document.getElementById('recordButton');
-      recordButton.disabled = false;
-      recordButton.addEventListener('click', startRecognition);
-
       // 음성인식 객체 생성
       recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.lang = 'ko-KR'; // 음성인식 언어 설정
@@ -217,9 +213,9 @@
 
     function startRecognition() {
       recognition.start();
-      recordButton.disabled = true; // 음성 녹음 버튼 비활성화
       recordingStartTime = Date.now(); // 기록 시작 시간 저장
       console.log('음성 녹음 버튼이 활성화되었습니다.');
+
 
     }
 
@@ -297,14 +293,13 @@
       });
     });
 
-    function updateRecordingTime() {
+  function updateRecordingTime() {
     const currentTime = Date.now();
     const elapsedSeconds = Math.floor((currentTime - recordingStartTime) / 1000);
     console.log(`Recording time: ${elapsedSeconds} seconds`);
-}
+  }
 
   setInterval(updateRecordingTime, 1000);
-
   </script>
 
 </body>
