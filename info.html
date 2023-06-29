@@ -165,10 +165,10 @@
 <body>
      <div class="wrap" >
         <div class="container_right">
-         <div class="box" id="box1" style="margin-top: 10%;">이어 하기</div>
-         <div class="box" id="box2">단계 선택</div>
+         <div class="box" id="box1" style="margin-top: 10%;">스트레칭</div>
+         <div class="box" id="box2">게임하기</div>
          <div class="box" id="box3">나의 정보</div>
-         <div class="box" id="box4">설정</div>
+         <div class="box" id="box4">홈 화면</div>
           <button id="recordButton" disabled>
             <div class="dot-spinner">
               <div class="dot-spinner__dot"></div>
@@ -250,40 +250,34 @@
       const box3 = document.getElementById('box3');
       const box4 = document.getElementById('box4');
 
-      switch (command) {
-        case '이어하기':
-        case '이어 하기':
+    switch (command) {
+        case '스트레칭':
+        case '스트 레칭':
         case '1번':
-        case '일번':
-        case '일 번':
           selectedBox = box1;
           selectBox(box1);
           break;
-        case '단계선택':
-        case '단계 선택':
+        case '게임하기':
+        case '게임 하기':
         case '2번':
-        case '이번':
-        case '이 번':
           selctedBox = box2;
           selectBox(box2);
           break;
         case '나의정보':
         case '나의 정보':
         case '3번':
-        case '삼번':
         selectedBox = box3;
           selectBox(box3);
           break;
-        case '설정':
+        case '홈 화면':
+        case '홈화면':
         case '4번':
-        case '사번':
           selectedBox = box4;
           selectBox(box4);
           break;
         default:
           recordButton.disabled = false; // 음성 녹음 버튼 다시 활성화
-          resetRecognition(); // Reset and restart the speech recognition
-          
+          startRecognition();
       }
     }
   
