@@ -32,15 +32,16 @@
       color: white;
       text-align: center;
       display: flex;
-      justify-content: center;
+      justify-content: center;      
+      border-radius: 7.5px;
       align-items: center;
       font-size: 30px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* ê·¸ë¦¼ì íš¨ê³¼ ì¶”ê°€ */
-      transition: background-color 0.3s ease; /* ìƒ‰ ë³€í™”ì— ì• ë‹ˆë©”ì´ì…˜ íš¨ê³¼ ì¶”ê°€ */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* ê·¸ë¦¼? ?š¨ê³? ì¶”ê?? */
+      transition: background-color 0.3s ease; /* ?ƒ‰ ë³??™”?— ?• ?‹ˆë©”ì´?…˜ ?š¨ê³? ì¶”ê?? */
     }
      .box:hover {
-      background-color: white; /* í˜¸ë²„ ì‹œ ë°°ê²½ìƒ‰ì„ í•˜ì–€ìƒ‰ìœ¼ë¡œ ë³€ê²½ */
-      color: black; /* í˜¸ë²„ ì‹œ í…ìŠ¤íŠ¸ ìƒ‰ìƒì„ ê²€ì •ìƒ‰ìœ¼ë¡œ ë³€ê²½ */
+      background-color: white; /* ?˜¸ë²? ?‹œ ë°°ê²½?ƒ‰?„ ?•˜????ƒ‰?œ¼ë¡? ë³?ê²? */
+      color: #6E5F5F; /* ?˜¸ë²? ?‹œ ?…?Š¤?Š¸ ?ƒ‰?ƒ?„ ê²?? •?ƒ‰?œ¼ë¡? ë³?ê²? */
     }
     /* Voice Recording Button Styles */
     #recordButton {
@@ -165,13 +166,13 @@
 <body>
      <div class="wrap" >
         <div class="container_right">
-         <div class="box" id="box1" style="margin-top: 10%;">ì´ì–´ í•˜ê¸°</div>
-         <div class="box" id="box2">ë‹¨ê³„ ì„ íƒ</div>
-         <div class="box" id="box3">ë‚˜ì˜ ì •ë³´</div>
-         <div class="box" id="box4">ì„¤ì •</div>
+         <div class="box" id="box1" style="margin-top: 10%;">?Š¤?Š¸? ˆì¹?</div>
+         <div class="box" id="box2">ê²Œì„?•˜ê¸?</div>
+         <div class="box" id="box3">?‚˜?˜ ? •ë³?</div>
+         <div class="box" id="box4">?™ˆ ?™”ë©?</div>
           <button id="recordButton" disabled>
             <div id="user-seed">
-              <p><ìœ ì €ì´ë¦„></p>
+              <p><?œ ????´ë¦?></p>
               <progress value="20" max="100">
               </progress>
             </div>
@@ -185,7 +186,7 @@
               <div class="dot-spinner__dot"></div>
             <div class="dot-spinner__dot"></div>
             </div>
-            <p style="margin-left: 20px;">ë“£ëŠ”ì¤‘...</p>
+            <p style="margin-left: 20px;">?“£?Š”ì¤?...</p>
           </button>
         </div>
      </div>
@@ -198,33 +199,52 @@
     let selectedBox = null;
 
 
-    // ìŒì„±ì¸ì‹ API ì§€ì› ì—¬ë¶€ í™•ì¸
+    // ?Œ?„±?¸?‹ API ì§??› ?—¬ë¶? ?™•?¸
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-      // ìŒì„±ì¸ì‹ ê°ì²´ ìƒì„±
+      // ?Œ?„±?¸?‹ ê°ì²´ ?ƒ?„±
       recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'ko-KR'; // ìŒì„±ì¸ì‹ ì–¸ì–´ ì„¤ì •
+      recognition.lang = 'ko-KR'; // ?Œ?„±?¸?‹ ?–¸?–´ ?„¤? •
 
-      // ìŒì„± ì¸ì‹ ê²°ê³¼ ì´ë²¤íŠ¸ ì²˜ë¦¬
+      // ?Œ?„± ?¸?‹ ê²°ê³¼ ?´ë²¤íŠ¸ ì²˜ë¦¬
       recognition.onresult = function(event) {
         const result = event.results[0][0].transcript;
         processVoiceCommand(result);
       };
     } else {
-      // ìŒì„±ì¸ì‹ APIë¥¼ ì§€ì›í•˜ì§€ ì•ŠëŠ” ê²½ìš° ì²˜ë¦¬
-      console.log('ìŒì„±ì¸ì‹ì„ ì§€ì›í•˜ì§€ ì•ŠëŠ” ë¸Œë¼ìš°ì €ì…ë‹ˆë‹¤.');
+      // ?Œ?„±?¸?‹ APIë¥? ì§??›?•˜ì§? ?•Š?Š” ê²½ìš° ì²˜ë¦¬
+      console.log('?Œ?„±?¸?‹?„ ì§??›?•˜ì§? ?•Š?Š” ë¸Œë¼?š°????…?‹ˆ?‹¤.');
     }
 
 
     function startRecognition() {
       recognition.start();
-      recordingStartTime = Date.now(); // ê¸°ë¡ ì‹œì‘ ì‹œê°„ ì €ì¥
-      console.log('ìŒì„± ë…¹ìŒ ë²„íŠ¼ì´ í™œì„±í™”ë˜ì—ˆìŠµë‹ˆë‹¤.');
+      recordingStartTime = Date.now(); // ê¸°ë¡ ?‹œ?‘ ?‹œê°? ????¥
+      console.log('?Œ?„± ?…¹?Œ ë²„íŠ¼?´ ?™œ?„±?™”?˜?—ˆ?Šµ?‹ˆ?‹¤.');
 
 
     }
 
-    // í˜ì—ì§€ ë Œë”ë§ ì‹œ ìŒì„±ì¸ì‹ ë°”ë¡œ ì‹œì‘
+    // ?˜?—ì§? ? Œ?”ë§? ?‹œ ?Œ?„±?¸?‹ ë°”ë¡œ ?‹œ?‘
     startRecognition();
+
+    function resetRecognition() {
+      if (recognition && recognition.state === 'listening') {
+        recognition.stop();
+      }
+
+      recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'ko-KR';
+      recognition.onresult = function(event) {
+        const result = event.results[0][0].transcript;
+        processVoiceCommand(result);
+      };
+
+      recognition.start();
+      recordButton.disabled = true; // Disable the record button while starting a new recognition session
+      recordingStartTime = Date.now();
+      console.log('?Œ?„± ?…¹?Œ ë²„íŠ¼?´ ?™œ?„±?™”?˜?—ˆ?Šµ?‹ˆ?‹¤.');
+    }
+
 
     function processVoiceCommand(command) {
       console.log('Recognized command:', command);
@@ -234,52 +254,51 @@
       const box3 = document.getElementById('box3');
       const box4 = document.getElementById('box4');
 
-      switch (command) {
-        case 'ì´ì–´í•˜ê¸°':
-        case 'ì´ì–´ í•˜ê¸°':
-        case '1ë²ˆ':
+    switch (command) {
+        case '?Š¤?Š¸? ˆì¹?':
+        case '?Š¤?Š¸ ? ˆì¹?':
+        case '1ë²?':
           selectedBox = box1;
           selectBox(box1);
           break;
-        case 'ë‹¨ê³„ì„ íƒ':
-        case 'ë‹¨ê³„ ì„ íƒ':
-        case '2ë²ˆ':
+        case 'ê²Œì„?•˜ê¸?':
+        case 'ê²Œì„ ?•˜ê¸?':
+        case '2ë²?':
           selctedBox = box2;
           selectBox(box2);
           break;
-        case 'ë‚˜ì˜ì •ë³´':
-        case 'ë‚˜ì˜ ì •ë³´':
-        case '3ë²ˆ':
+        case '?‚˜?˜? •ë³?':
+        case '?‚˜?˜ ? •ë³?':
+        case '3ë²?':
         selectedBox = box3;
           selectBox(box3);
           break;
-        case 'ì„¤ì •':
-        case '4ë²ˆ':
+        case '?™ˆ ?™”ë©?':
+        case '?™ˆ?™”ë©?':
+        case '4ë²?':
           selectedBox = box4;
           selectBox(box4);
           break;
         default:
-          recordButton.disabled = false; // ìŒì„± ë…¹ìŒ ë²„íŠ¼ ë‹¤ì‹œ í™œì„±í™”
+          recordButton.disabled = false; // ?Œ?„± ?…¹?Œ ë²„íŠ¼ ?‹¤?‹œ ?™œ?„±?™”
           startRecognition();
       }
     }
-
+  
  function selectBox(box) {
   const boxes = document.querySelectorAll('.box');
   boxes.forEach((box) => {
     box.style.backgroundColor = 'transparent';
-    box.style.color = 'black';
+    box.style.color = '#6E5F5F';
   });
   
   box.style.backgroundColor = 'white';
-  box.style.color = 'black';
+  box.style.color = '#6E5F5F';
   
   setTimeout(() => {
     box.click();
   }, 2000);
 }
-
-
     const boxes = document.querySelectorAll('.box');
     boxes.forEach((box, index) => {
       box.addEventListener('click', () => {
@@ -290,9 +309,9 @@
         } else if (index === 1){
           window.location.href = 'selectLevel.html'
         } else if (index === 2){
-          console.log('ë‚˜ì˜ ì •ë³´ë¡œ ì´ë™')
+          console.log('?‚˜?˜ ? •ë³´ë¡œ ?´?™')
         } else if (index === 3){
-          console.log('ì„¤ì •ìœ¼ë¡œ ì´ë™')
+          console.log('?„¤? •?œ¼ë¡? ?´?™')
         }
       });
     });
@@ -305,10 +324,10 @@
 
   setInterval(updateRecordingTime, 1000);
 
-  /* ìœ ì € ì”¨ì•— ë‹¨ê³„ í‘œì‹œ */
+  /* ?œ ??? ?”¨?•— ?‹¨ê³? ?‘œ?‹œ */
   const userSeed = document.querySelector('#user-seed p');
   const progress = document.querySelector('progress');
-  // ìœ ì € ê²Œì„ ë ˆë²¨ ê°€ì ¸ì™€ì„œ ë°°ê²½ì´ë¯¸ì§€ ë°”ê¾¸ê¸°
+  // ?œ ??? ê²Œì„ ? ˆë²? ê°?? ¸????„œ ë°°ê²½?´ë¯¸ì?? ë°”ê¾¸ê¸?
   
 
   </script>
