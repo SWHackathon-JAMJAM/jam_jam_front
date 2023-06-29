@@ -7,7 +7,7 @@
   <style>
     body {
       height: 100vh;
-      background-image: url('image/main.png');
+      background-image: url('image/menu_1.png');
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover; 
@@ -31,7 +31,8 @@
       color: white;
       text-align: center;
       display: flex;
-      justify-content: center;
+      justify-content: center;      
+      border-radius: 7.5px;
       align-items: center;
       font-size: 30px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 그림자 효과 추가 */
@@ -39,7 +40,7 @@
     }
      .box:hover {
       background-color: white; /* 호버 시 배경색을 하얀색으로 변경 */
-      color: black; /* 호버 시 텍스트 색상을 검정색으로 변경 */
+      color: #6E5F5F; /* 호버 시 텍스트 색상을 검정색으로 변경 */
     }
     /* Voice Recording Button Styles */
     #recordButton {
@@ -220,11 +221,29 @@
       recordButton.disabled = true; // 음성 녹음 버튼 비활성화
       recordingStartTime = Date.now(); // 기록 시작 시간 저장
       console.log('음성 녹음 버튼이 활성화되었습니다.');
-
     }
 
     // 페에지 렌더링 시 음성인식 바로 시작
     startRecognition();
+
+    function resetRecognition() {
+      if (recognition && recognition.state === 'listening') {
+        recognition.stop();
+      }
+
+      recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'ko-KR';
+      recognition.onresult = function(event) {
+        const result = event.results[0][0].transcript;
+        processVoiceCommand(result);
+      };
+
+      recognition.start();
+      recordButton.disabled = true; // Disable the record button while starting a new recognition session
+      recordingStartTime = Date.now();
+      console.log('음성 녹음 버튼이 활성화되었습니다.');
+    }
+
 
     function processVoiceCommand(command) {
       console.log('Recognized command:', command);
@@ -238,48 +257,53 @@
         case '이어하기':
         case '이어 하기':
         case '1번':
+        case '일번':
+        case '일 번':
           selectedBox = box1;
           selectBox(box1);
           break;
         case '단계선택':
         case '단계 선택':
         case '2번':
+        case '이번':
+        case '이 번':
           selctedBox = box2;
           selectBox(box2);
           break;
         case '나의정보':
         case '나의 정보':
         case '3번':
+        case '삼번':
         selectedBox = box3;
           selectBox(box3);
           break;
         case '설정':
         case '4번':
+        case '사번':
           selectedBox = box4;
           selectBox(box4);
           break;
         default:
           recordButton.disabled = false; // 음성 녹음 버튼 다시 활성화
-          startRecognition();
+          resetRecognition(); // Reset and restart the speech recognition
+          
       }
     }
-
+  
  function selectBox(box) {
   const boxes = document.querySelectorAll('.box');
   boxes.forEach((box) => {
     box.style.backgroundColor = 'transparent';
-    box.style.color = 'black';
+    box.style.color = '#6E5F5F';
   });
   
   box.style.backgroundColor = 'white';
-  box.style.color = 'black';
+  box.style.color = '#6E5F5F';
   
   setTimeout(() => {
     box.click();
   }, 2000);
 }
-
-
     const boxes = document.querySelectorAll('.box');
     boxes.forEach((box, index) => {
       box.addEventListener('click', () => {
