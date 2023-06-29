@@ -46,13 +46,13 @@ function processVoiceCommand(command) {
     }
 
     const inputForm = document.querySelector('input');
-    inputForm.innerText(command);
+    inputForm.value = command;
 }
 
 function updateRecordingTime() {
-const currentTime = Date.now();
-const elapsedSeconds = Math.floor((currentTime - recordingStartTime) / 1000);
-console.log(`Recording time: ${elapsedSeconds} seconds`);
+    const currentTime = Date.now();
+    const elapsedSeconds = Math.floor((currentTime - recordingStartTime) / 1000);
+    console.log(`Recording time: ${elapsedSeconds} seconds`);
 }
 
 setInterval(updateRecordingTime, 1000);
