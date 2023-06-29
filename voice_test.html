@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice print test</title>
+    <style>
+        div {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button class="dictate">?ùå?Ñ±?ù∏?ãù</button>
+        <button class="level1">1</button>
+        <button class="level1">2</button>
+        <button class="level1">3</button>
+    </div>
+    <script>
+        const $ = (el) => document.querySelector(el);
+
+        const store = {
+            texts : '',
+            isRecognizing: true
+        };
+
+        (() => {
+            let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!("webkitSpeechRecognition" in window)){
+                alert("Ïß??õê ?ïà?êò?äî Î∏åÎùº?ö∞??? ?ûÖ?ãà?ã§. !")
+            } else {
+                const recognition = new SpeechRecognition();
+                recognition.interimResults = true; // true: ?ùå?†à ?ó∞?Üç?†Å ?ù∏?ãù, false: ?ïú ?ùå?†àÎß? Í∏∞Î°ù
+                recognition.lang = 'ko-KR';
+                recognition.continuous = false; // ?ù∏?ãù Í≤∞Í≥ºÍ∞? ?ó∞?Üç?ù∏Ïß? ?ã®?ùº?ù∏Ïß? (Í∏∞Î≥∏ false ?ã®?ùº.)
+                recognition.maxAlternatives = 20000;
+
+                recognition.onspeechend = function() {
+                    recognition.stop;
+                    store.isRecognizing = true;
+                };
+
+                recognition.onresult = function(e) {
+                    store.texts = Array.from(e.results).map(results => results[0].transcript).join("");
+                    console.log(store.texts);
+                    if (store.texts === "1?ã®Í≥?") {
+                        console.log("success");
+                    }
+                };
+
+                const active = () => {
+                    recognition.start();
+                    store.isRecognizing = false;
+                };
+
+                const unactive = () => {
+                    recognition.stop();
+                    store.isRecognizing = true;
+                };
+
+                $('.dictate').addEventListener('click', () => {
+                    if (store.isRecognizing) {
+                        active();
+                    } else {
+                        unactive();
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
