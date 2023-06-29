@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/user_seed.css" />
   <title>Document</title>
   <style>
     body {
       height: 100vh;
-      background-image: url('image/main.png');
+      background-image: url('image/info.jpg');
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover; 
@@ -169,6 +170,11 @@
          <div class="box" id="box3">나의 정보</div>
          <div class="box" id="box4">설정</div>
           <button id="recordButton" disabled>
+            <div id="user-seed">
+              <p><유저이름></p>
+              <progress value="20" max="100">
+              </progress>
+            </div>
             <div class="dot-spinner">
               <div class="dot-spinner__dot"></div>
               <div class="dot-spinner__dot"></div>
@@ -177,15 +183,13 @@
               <div class="dot-spinner__dot"></div>
               <div class="dot-spinner__dot"></div>
               <div class="dot-spinner__dot"></div>
-             <div class="dot-spinner__dot"></div>
-      </div>
-            <p style="margin-left: 20px;">듣는중...</p></button>
-
+            <div class="dot-spinner__dot"></div>
+            </div>
+            <p style="margin-left: 20px;">듣는중...</p>
+          </button>
         </div>
      </div>
     
-
-
 
   <script>
     let recognition;
@@ -300,7 +304,13 @@
   }
 
   setInterval(updateRecordingTime, 1000);
-  </script>
 
+  /* 유저 씨앗 단계 표시 */
+  const userSeed = document.querySelector('#user-seed p');
+  const progress = document.querySelector('progress');
+  // 유저 게임 레벨 가져와서 배경이미지 바꾸기
+  
+
+  </script>
 </body>
 </html>
