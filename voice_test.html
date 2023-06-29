@@ -22,7 +22,7 @@
 </head>
 <body>
     <div>
-        <button class="dictate">?Œ?„±?¸?‹</button>
+        <button class="dictate">ï¿½ì“¬ï¿½ê½¦ï¿½ì”¤ï¿½ë–‡</button>
         <button class="level1">1</button>
         <button class="level1">2</button>
         <button class="level1">3</button>
@@ -38,12 +38,12 @@
         (() => {
             let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!("webkitSpeechRecognition" in window)){
-                alert("ì§??› ?•ˆ?˜?Š” ë¸Œë¼?š°??? ?…?‹ˆ?‹¤. !")
+                alert("ì§€ì›ë˜ì§€ ì•ŠëŠ” ë¸Œë¼ìš°ì € ì…ë‹ˆë‹¤. !")
             } else {
                 const recognition = new SpeechRecognition();
-                recognition.interimResults = true; // true: ?Œ? ˆ ?—°?†?  ?¸?‹, false: ?•œ ?Œ? ˆë§? ê¸°ë¡
+                recognition.interimResults = true; // true: ì—°ì† ìŒì ˆ ì¸ì‹, false: í•œ ìŒì  ì¸ì‹
                 recognition.lang = 'ko-KR';
-                recognition.continuous = false; // ?¸?‹ ê²°ê³¼ê°? ?—°?†?¸ì§? ?‹¨?¼?¸ì§? (ê¸°ë³¸ false ?‹¨?¼.)
+                recognition.continuous = false; // ì—°ì†/ë‹¨ì¼ ê²°ê³¼ ë°˜í™˜ ì œì–´ (ê¸°ë³¸ false ë‹¨ì¼)
                 recognition.maxAlternatives = 20000;
 
                 recognition.onspeechend = function() {
@@ -54,7 +54,7 @@
                 recognition.onresult = function(e) {
                     store.texts = Array.from(e.results).map(results => results[0].transcript).join("");
                     console.log(store.texts);
-                    if (store.texts === "1?‹¨ê³?") {
+                    if (store.texts === "1ï¿½ë–’æ€¨ï¿½") {
                         console.log("success");
                     }
                 };
